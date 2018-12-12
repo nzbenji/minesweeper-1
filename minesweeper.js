@@ -77,19 +77,19 @@ function countSurroundingMines (cell) {
 }
 
 const restartSound = _ => {
-  const restart = new Audio('/restartSound.mp3')
+  const restart = new Audio('./sounds/restartSound.mp3')
   restart.loop = false;
   restart.play();
 }
 
 const winningSound = _ => {
-  const winningShaq = new Audio('./winSound.mp3');
+  const winningShaq = new Audio('/sounds/winSound.mp3');
   winningShaq.loop = false;
   winningShaq.play();
 }
 
 const losingSound = _ => {
-  const losingShaq = new Audio('/bombSound.mp3')
+  const losingShaq = new Audio('/sounds/bombSound.mp3')
   losingShaq.loop = false;
 
   board.cells.forEach((item) => {
