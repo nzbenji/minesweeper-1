@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', startGame)
 
+document.querySelector('.restart').addEventListener('click', restartGame)
+
 // Define your `board` object here!
 var board = {
   cells: []
@@ -30,6 +32,12 @@ function startGame () {
   
   // Don't remove this function call: it makes the game work!
   lib.initBoard()
+}
+
+function restartGame() {
+  board = { cells : [] }
+  document.getElementsByClassName('board')[0].innerHTML = '';
+  startGame();
 }
 
 // Define this function to look for a win condition:
