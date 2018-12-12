@@ -2,21 +2,27 @@ document.addEventListener('DOMContentLoaded', startGame)
 
 // Define your `board` object here!
 var board = {
-  cells: [
-    {row: 0, col: 0, isMine: true, isMarked: false, hidden: true, surroundingMines: 0}, 
-    {row: 0, col: 1, isMine: false, isMarked: false, hidden: true, surroundingMines: 0}, 
-    {row: 0, col: 2, isMine: false, isMarked: false, hidden: true, surroundingMines: 0}, 
-    {row: 1, col: 1, isMine: false, isMarked: false, hidden: true, surroundingMines: 0},
-    {row: 1, col: 0, isMine: false, isMarked: false, hidden: true, surroundingMines: 0},
-    {row: 1, col: 2, isMine: false, isMarked: false, hidden: true, surroundingMines: 0},
-    {row: 2, col: 0, isMine: true, isMarked: false, hidden: true, surroundingMines: 0},
-    {row: 2, col: 1, isMine: false, isMarked: false, hidden: true, surroundingMines: 0},
-    {row: 2, col: 2, isMine: false, isMarked: false, hidden: true, surroundingMines: 0}
-  ]
+  cells: []
+}
+const boardSize = 6;
+
+const gameBoard = _ => {
+    for( let rows = 0; rows < boardSize; rows++){
+      for( let cols = 0; cols < boardSize; cols++){
+        board.cells.push({
+          row: rows,
+          col: cols,
+          isMine: Math.floor(Math.random(1) < 0.3),
+          isMarked: false,
+          hidden: true,
+          surroundingMines: 0
+        })
+      }
+    }
 }
 
 function startGame () {
-
+  gameBoard();
   board.cells.forEach(item => item.surroundingMines = countSurroundingMines(item))
   
   document.addEventListener('click', checkForWin)
@@ -35,9 +41,9 @@ function checkForWin () {
   board.cells.forEach(check => {
     if(check.isMine && !check.isMarked) return;
     else if(!check.isMine && check.hidden) return;
-    
     lib.displayMessage('You win!')
   });
+  
   console.log(board)
 }
 
