@@ -3,9 +3,9 @@ document.addEventListener('DOMContentLoaded', startGame)
 // Define your `board` object here!
 var board = {
   cells: [
-    {row: 0, col: 0, isMine: false, isMarked: false, hidden: true, surroundingMines: 0}, 
+    {row: 0, col: 0, isMine: true, isMarked: false, hidden: true, surroundingMines: 0}, 
     {row: 0, col: 1, isMine: false, isMarked: false, hidden: true, surroundingMines: 0}, 
-    {row: 0, col: 2, isMine: true, isMarked: false, hidden: true, surroundingMines: 0}, 
+    {row: 0, col: 2, isMine: false, isMarked: false, hidden: true, surroundingMines: 0}, 
     {row: 1, col: 1, isMine: false, isMarked: false, hidden: true, surroundingMines: 0},
     {row: 1, col: 0, isMine: false, isMarked: false, hidden: true, surroundingMines: 0},
     {row: 1, col: 2, isMine: false, isMarked: false, hidden: true, surroundingMines: 0},
@@ -16,9 +16,12 @@ var board = {
 }
 
 function startGame () {
-  for( let i = 0; i < board.cells.length; i++){
-    board.cells[i].surroundingMines = countSurroundingMines(board.cells[i])
-  }
+
+  board.cells.forEach(item => item.surroundingMines = countSurroundingMines(item))
+  
+  document.addEventListener('click', checkForWin)
+  document.addEventListener('contextmenu', checkForWin) //Marks cell as '!'
+  
   // Don't remove this function call: it makes the game work!
   lib.initBoard()
 }
@@ -29,10 +32,15 @@ function startGame () {
 // 2. Are all of the mines marked?
 function checkForWin () {
 
-  // You can use this function call to declare a winner (once you've
-  // detected that they've won, that is!)
-  //   lib.displayMessage('You win!')
+  board.cells.forEach(check => {
+    if(check.isMine && !check.isMarked) return;
+    else if(!check.isMine && check.hidden) return;
+    
+    lib.displayMessage('You win!')
+  });
+  console.log(board)
 }
+
 
 // Define this function to count the number of mines around the cell
 // (there could be as many as 8). You don't have to get the surrounding
@@ -46,11 +54,11 @@ function countSurroundingMines (cell) {
   let surrounding = lib.getSurroundingCells(cell.row, cell.col)
   let count = 0;
 
-  for ( let i = 0; i < surrounding.length; i++){
-    if(surrounding[i].isMine){
+  surrounding.forEach((cell) => {
+    if(cell.isMine) {
       count++
     }
-  }
+  });
   return count;
 }
 
