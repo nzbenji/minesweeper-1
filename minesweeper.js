@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', startGame)
 var board = {
   cells: []
 }
-const boardSize = 6;
+const boardSize = 2;
 
 const gameBoard = _ => {
     for( let rows = 0; rows < boardSize; rows++){
@@ -38,11 +38,18 @@ function startGame () {
 // 2. Are all of the mines marked?
 function checkForWin () {
 
-  board.cells.forEach(check => {
-    if(check.isMine && !check.isMarked) return;
-    else if(!check.isMine && check.hidden) return;
-    lib.displayMessage('You win!')
-  });
+  for(let i = 0; i < board.cells.length; i++) {
+    if(board.cells[i].isMine && board.cells[i].isMarked) return
+    else if(!board.cells[i].isMine && board.cells[i].hidden) return
+  }
+  lib.displayMessage('You win!')
+
+  // board.cells.forEach(check => {
+  //   if(check.isMine && check.isMarked) return;
+  //   else if(!check.isMine && check.hidden) return;
+    
+  // });
+  // lib.displayMessage('You win!')
   
   console.log(board)
 }
