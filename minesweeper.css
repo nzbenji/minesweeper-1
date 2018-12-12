@@ -25,6 +25,26 @@ body {
   flex-wrap: wrap;
 }
 
+.restart {
+  position: absolute;
+  top: 1.6rem;
+  right: 34%;
+  background-color: #ecf0f1;
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 2px;
+  height: 3rem;
+  width: 10rem;
+  border-radius: 4px;
+  outline: none;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+.restart:hover {
+  background-color: #979797;
+}
+
 .board div {
   color: green;
   font-size: 2rem;
@@ -44,7 +64,7 @@ body {
 }
 
 div.mine, div.mine:hover {
-  background: no-repeat center/60% url("images/bomb.svg") crimson;
+  background: no-repeat center/99% url("images/bomb.png");
 }
 
 div.hidden {
