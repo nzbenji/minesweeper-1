@@ -83,13 +83,13 @@ const restartSound = _ => {
 }
 
 const winningSound = _ => {
-  const winningShaq = new Audio('./sounds/winSound.mp3');
+  const winningShaq = new Audio('./sounds/winSound.wav');
   winningShaq.loop = false;
   winningShaq.play();
 }
 
 const losingSound = _ => {
-  const losingShaq = new Audio('./sounds/bombSound.mp3')
+  const losingShaq = new Audio('./sounds/bombSound.wav')
   losingShaq.loop = false;
 
   board.cells.forEach((item) => {
